@@ -32,8 +32,6 @@ public class Network {
 	// Output expected. 
 	double training_expected_outputs[][];
 
-
-
 	/*
 	 * @param int input Number of training_inputs/neurons.
 	 * 
@@ -193,7 +191,6 @@ public class Network {
 		}
 
 		printResult();
-
 		System.out.println("Sum of squared errors = " + error);
 		System.out.println("##### EPOCH " + trainCycles + "\n");
 	}
@@ -266,5 +263,58 @@ public class Network {
 
 		return calculated_output;
 	}
+	
+    public void printWeightUpdate() {
+        System.out.println("printWeightUpdate, put this i trainedWeights() and set isTrained to true");
+        // weights for the hidden layer
+        for (Neuron n : hidden_layer) {
+            ArrayList<Connection> connections = n.getAllInConnections();
+            for (Connection con : connections) {
+                String w = df.format(con.getWeight());
+                System.out.println("weightUpdate.put(weightKey(" + n.id + ", "
+                        + con.id + "), " + w + ");");
+            }
+        }
+        // weights for the output layer
+        for (Neuron n : output_layer) {
+            ArrayList<Connection> connections = n.getAllInConnections();
+            for (Connection con : connections) {
+                String w = df.format(con.getWeight());
+                System.out.println("weightUpdate.put(weightKey(" + n.id + ", "
+                        + con.id + "), " + w + ");");
+            }
+        }
+        System.out.println();
+    }
+	
+	public ArrayList<ArrayList<Double>> getAllWeights(boolean show) {
+		ArrayList<ArrayList<Double>> weights = new ArrayList<ArrayList<Double>>();
+        // Weights for hidden layer Neurons.
+		int neuron_count = 0;
+        for (Neuron n : hidden_layer) {
+            ArrayList<Connection> connections = n.getAllInConnections();
+            weights.add(new ArrayList<Double>());
+    		if(show) { System.out.print("\n--Hidden Neuron:" + n.id +" --\n"); }
+            for (Connection con : connections) {
+                double w = con.getWeight();
+                weights.get(neuron_count).add(w);
+                if(show) { System.out.println("   Connection: " + con.id + " Weight:" + w); }
+            }
+            neuron_count++;
+        }
+        // Weights for output layer Neurons.
+        for (Neuron n : output_layer) {
+            ArrayList<Connection> connections = n.getAllInConnections();
+            weights.add(new ArrayList<Double>());
+            if(show) { System.out.println("\nOutput Neuron:" + n.id + "--\n"); }
+            for (Connection con : connections) {
+                double w = con.getWeight();
+                weights.get(neuron_count).add(w);
+                if(show) { System.out.println("   Connection: " + con.id + " Weight:" + w); }
+            }
+            neuron_count++;
+        }
+		return weights;
+    }
 
 }

@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.ArrayList;
+
 import network.Network;
 
 public class TestNetwork {
@@ -27,18 +29,18 @@ public class TestNetwork {
 		Network nn = new Network(3, 4, 1);
 		
 		// Then set the training inputs & outputs.
-		double[][] training_inputs = { {1,1,0},{0,0,1}, {1,1,1}};
-		double[][] training_outputs = { {1} , {0} , {1}};
+		double[][] training_inputs = { {1,1,0},{0,0,1}};
+		double[][] training_outputs = { {1} , {0}};
 		nn.setTrainingInputs(training_inputs);
 		nn.setTrainingOutputs(training_outputs);
 		
 		// Then train it however many times you want.
-		nn.train(5000);
+		nn.train(5);
 		
 		
 		// Perform a test to see what it calculates. You can also perform multiple test sets here,
 		// it will automatically increase the number of outputs.
-		double[][] test = { {1,1,0} };
+		double[][] test = { {1,1,0} , {0, 0, 1}};
 		int[][] result = nn.calcualteOutput(test);
 		
 		// Printing results.
@@ -51,5 +53,22 @@ public class TestNetwork {
 			System.out.print("]");
 		}
 		System.out.print("]");
+		
+		/*
+		 * @param boolean show
+		 * 		Set true to print the values on the console. False won't print but will still work.
+		 * Getting the weights. You can add this at the end of train() to get it every cycle. 
+		 * 
+		 * Each index of the ArrayList is a neuron, in order (skipping the input neurons since they have no weight), and
+		 * each Neuron will contain all the weights of the connections connected to it. The last neuron will have an extra weight
+		 * connected to it, it's the output neuron and the extra weight is the bias.
+		 */
+		ArrayList<ArrayList<Double>> all_weights = nn.getAllWeights(false);
+		
+		for(ArrayList<Double> neuron_weights : all_weights){
+			for(Double weight : neuron_weights){
+				System.out.println("Weight : " + weight);
+			}
+		}
 	}
 }
