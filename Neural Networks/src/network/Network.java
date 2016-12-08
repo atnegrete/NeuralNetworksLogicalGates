@@ -264,29 +264,6 @@ public class Network {
 		return calculated_output;
 	}
 	
-    public void printWeightUpdate() {
-        System.out.println("printWeightUpdate, put this i trainedWeights() and set isTrained to true");
-        // weights for the hidden layer
-        for (Neuron n : hidden_layer) {
-            ArrayList<Connection> connections = n.getAllInConnections();
-            for (Connection con : connections) {
-                String w = df.format(con.getWeight());
-                System.out.println("weightUpdate.put(weightKey(" + n.id + ", "
-                        + con.id + "), " + w + ");");
-            }
-        }
-        // weights for the output layer
-        for (Neuron n : output_layer) {
-            ArrayList<Connection> connections = n.getAllInConnections();
-            for (Connection con : connections) {
-                String w = df.format(con.getWeight());
-                System.out.println("weightUpdate.put(weightKey(" + n.id + ", "
-                        + con.id + "), " + w + ");");
-            }
-        }
-        System.out.println();
-    }
-	
 	public ArrayList<ArrayList<Double>> getAllWeights(boolean show) {
 		ArrayList<ArrayList<Double>> weights = new ArrayList<ArrayList<Double>>();
         // Weights for hidden layer Neurons.
