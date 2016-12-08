@@ -5,8 +5,14 @@ import gates.GatesTrainingData;
 import gates.NorGate;
 import gates.OrGate;
 
-public class TestGates {
+public class TestPerceptrons {
 	
+	/*
+	 * The Perceptron Gates are really easy to use and you can use them if you want. 
+	 * They are pretty limited and basically I could only make three gates out of them. 
+	 * These gates extend Perceptron thus you can just create as many objects as you want
+	 *  and use them as you need. All they can do is Train() and testInputs()
+	 */
 	public static void main(String args[]){
 		AndGate and = new AndGate(1, .1, GatesTrainingData.AND_WEIGHTS,GatesTrainingData.AND_TRAININGSET);
 		and.Train(10);
