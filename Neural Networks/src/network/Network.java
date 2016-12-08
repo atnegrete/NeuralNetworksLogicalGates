@@ -25,7 +25,7 @@ public class Network {
 	final double momentum = 0.7f;
 
 	// Initialize with random values.
-	final double result_outputs[][] = { { -1 }, { -1 } }; 
+	double result_outputs[][]; 
 	double output[];
 	// training_inputs given. 
 	double training_inputs[][];
@@ -102,6 +102,15 @@ public class Network {
 
 	public void setTrainingOutputs(double[][] training_expected_outputs) {
 		this.training_expected_outputs = training_expected_outputs;
+		int sets = training_expected_outputs.length;
+		int size = training_expected_outputs[0].length;
+		result_outputs = new double[sets][size];
+		for(int i = 0; i < training_expected_outputs.length; i++){
+			for(int j = 0; j < training_expected_outputs[i].length; j++){
+				result_outputs[i][j] = -1;
+			}
+		}
+		
 	}
 
 	double getRandom() {

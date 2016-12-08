@@ -27,8 +27,8 @@ public class TestNetwork {
 		Network nn = new Network(3, 4, 1);
 		
 		// Then set the training inputs & outputs.
-		double[][] training_inputs = { {1,1,0},{0,0,1} };
-		double[][] training_outputs = { {1} , {0} };
+		double[][] training_inputs = { {1,1,0},{0,0,1}, {1,1,1}};
+		double[][] training_outputs = { {1} , {0} , {1}};
 		nn.setTrainingInputs(training_inputs);
 		nn.setTrainingOutputs(training_outputs);
 		
